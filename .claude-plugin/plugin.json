@@ -1,0 +1,8 @@
+{
+  "name": "sonoma",
+  "version": "0.2.0",
+  "description": "Spawn an isolated, seeded full-stack preview env for a coding task and get a shareable URL.",
+  "skills": [
+    "skills/sonoma/SKILL.md"
+  ]
+}

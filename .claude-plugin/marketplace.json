@@ -1,0 +1,13 @@
+{
+  "name": "sonoma",
+  "owner": {
+    "name": "palbrecht1"
+  },
+  "plugins": [
+    {
+      "name": "sonoma",
+      "source": "./",
+      "description": "The /sonoma skill: isolated full-stack preview envs per task."
+    }
+  ]
+}
