@@ -11,9 +11,12 @@ into it live, so you can QA against the preview while you work.
 
 How it fits together: the Sonoma CLI is the deterministic local driver, the
 control plane hosts the env and validates the project contract, and each repo
-declares how to boot itself in a `sonoma.yaml`. The first time a repo is used it
-needs a one-time setup (healthy local deps, login, and that `sonoma.yaml`);
-after that, every task just spawns an env from the existing contract.
+boots from a small contract. Sonoma reads that contract from a `sonoma.yaml`
+when the repo has one, and otherwise infers it from a `docker-compose.yml`: the
+ports the services publish become the preview URLs. The first time a repo is
+used it needs a one-time local setup (healthy deps and login), plus a
+`sonoma.yaml` only when the repo has no compose file; after that, every task
+just spawns an env.
 
 ## Steps
 
@@ -21,10 +24,13 @@ The Sonoma CLI is the `sonoma` command, installed globally from the npm package 
 
 1. Confirm the project and branch. The project is this git repository; the
    branch is the current git branch. The user may override either.
-2. **First run only:** if there is no `sonoma.yaml` at the repo root, the repo is
-   not set up for Sonoma yet. Read [onboarding.md](./onboarding.md) and follow it
-   (install the CLI, doctor, login, author the contract), then continue. If
-   `sonoma.yaml` already exists, skip straight to the next step.
+2. **First run only:** get the local setup healthy, and put a contract in place
+   only if the repo needs one. Read [onboarding.md](./onboarding.md) and follow
+   it: install the CLI, run `sonoma doctor` until green, and log in. A repo with
+   a `docker-compose.yml` needs no `sonoma.yaml`. `sonoma up` reads the ports its
+   services publish and builds the contract itself. Author a `sonoma.yaml` only
+   when the repo has no compose file, or to override the inferred seed, readiness
+   probe, or primary service. Once setup is done, skip straight to the next step.
 3. Spawn (or reuse) the environment and start the sync:
 
    ```bash

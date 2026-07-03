@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.2.0...plugin-v0.3.0) (2026-07-03)
+
+
+### Features
+
+* **landing,plugin:** dashboard quickstart guide + zero-config docs ([#53](https://github.com/palbrecht1/sonoma/issues/53)) ([66e4f37](https://github.com/palbrecht1/sonoma/commit/66e4f37cbd4407b010b14c59ed0328083c446d2b))
+
 ## [0.2.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.1.0...plugin-v0.2.0) (2026-07-02)
 
 

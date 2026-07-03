@@ -1,11 +1,15 @@
 # Sonoma onboarding (first run in a repo)
 
-Follow this when the user wants a Sonoma environment but the repo has **no
-`sonoma.yaml` at its root**. The goal is to get the local setup healthy, author
-the project contract with the user, and only then offer to spin up the env.
+Follow this the first time a repo uses Sonoma. The goal is to get the local
+setup healthy, decide whether the repo needs a `sonoma.yaml` at all, author one
+only if it does, and then offer to spin up the env.
+
+Most repos with a `docker-compose.yml` need no `sonoma.yaml`. `sonoma up` infers
+the contract from the ports the compose services publish. Author a contract only
+when there is no compose file, or when you want to override what Sonoma infers.
 
 The CLI is the `sonoma` command (it runs on the Bun runtime). Do the steps in
-order. Do not skip ahead to `up`.
+order. Do not skip ahead to `up` before `doctor` is green.
 
 ## 1. Make sure the CLI is installed
 
@@ -58,10 +62,41 @@ Fix each failing check, then re-run `doctor`. Repeat until every line is `ok`.
 
 Do not move on until `doctor` passes.
 
-## 4. Author the project contract (`sonoma.yaml`)
+## 4. Decide whether the repo needs a `sonoma.yaml`
 
-This is the part the CLI does not do for you. Detect the project's shape, propose
-a contract, confirm it with the user field by field, then write the file.
+Look for a compose file at the repo root (`docker-compose.yml`,
+`docker-compose.yaml`, `compose.yml`, or `compose.yaml`).
+
+**If one exists and the project is straightforward** (its services publish the
+ports they serve on), you do not need to author anything. `sonoma up` infers the
+contract:
+
+- Every service that publishes a port gets a preview URL.
+- The primary (the share link and the readiness target) is the service on a
+  common web port (3000, 5173, 8080, 8000, 80, 443, ...), or the first published
+  service when none matches.
+- Seeding defaults to a no-op, and readiness defaults to waiting for the primary
+  port to accept a connection.
+
+`sonoma up` prints what it inferred before it spawns, so you confirm the exposed
+services and the primary there. When that matches the project, skip authoring and
+go to the final step.
+
+**Author a `sonoma.yaml` (next step) only when:**
+
+- the repo has no compose file, or
+- the project needs a real seed command, a specific readiness probe, a particular
+  primary service, or extra sync excludes, or
+- a browser frontend calls a separate backend (you also wire the compose
+  `environment:` block for cross-service URLs and CORS, covered below).
+
+If none of those apply, you are done. Otherwise continue.
+
+## 5. Author the project contract (`sonoma.yaml`), when needed
+
+The CLI does not write this for you. When the decision above calls for a
+contract, detect the project's shape, propose one, confirm it with the user field
+by field, then write the file.
 
 ### Detect
 
@@ -126,7 +161,9 @@ Rules that matter:
 
 This is the part that makes the preview, and any API the frontend calls,
 reachable from a browser. Get it right or the preview loads but its API calls
-fail.
+fail. It lives in your `docker-compose.yml`, so it applies whether or not you
+author a `sonoma.yaml`: even an inferred contract needs these compose
+`environment:` entries when a browser frontend calls a separate backend.
 
 How addressing works:
 
@@ -182,7 +219,7 @@ Make sure the repo's `.gitignore` covers the two paths the contract assumes:
 
 Add them if they are missing.
 
-## 5. Gate on confidence, then offer `up`
+## 6. Gate on confidence, then offer `up`
 
 Before offering to spin up, sanity-check your own work:
 
