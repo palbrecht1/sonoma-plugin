@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/palbrecht1/sonoma/compare/plugin-v0.3.0...plugin-v0.3.1) (2026-07-03)
+
+
+### Bug Fixes
+
+* **plugin:** drop invalid skills field from manifest ([#55](https://github.com/palbrecht1/sonoma/issues/55)) ([ad81977](https://github.com/palbrecht1/sonoma/commit/ad81977b521ecdf925d6e71dbc4ed50510209e20))
+
 ## [0.3.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.2.0...plugin-v0.3.0) (2026-07-03)
 
 
