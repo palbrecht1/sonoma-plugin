@@ -39,6 +39,10 @@ The Sonoma CLI is the `sonoma` command, installed globally from the npm package 
 
    This prints the env id and, once ready, the preview URL. If it reports that
    you are not logged in, tell the user to run `sonoma login` (it opens the browser to sign in) and stop.
+   If `up` hangs on a phase (for example it sits at `AWAITING_SYNC`) or the env
+   reports `FAILED`, do not just retry blindly: read
+   [debugging.md](./debugging.md) and work through it. You can run commands and
+   stream logs inside the env to find the cause.
 4. Do the coding work for the user's request in this repository as usual. The
    running sync delivers every edit into the environment, so the preview
    reflects your changes without any extra step.

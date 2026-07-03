@@ -219,7 +219,41 @@ Make sure the repo's `.gitignore` covers the two paths the contract assumes:
 
 Add them if they are missing.
 
-## 6. Gate on confidence, then offer `up`
+## 6. Make your edits hot-reload
+
+Sonoma syncs the working tree into the env's `/workspace` and runs `docker
+compose -f <file> up -d` there. For an edit to show up live in the preview, the
+compose service has to see the synced file and re-render it:
+
+- **Bind-mount the source** into the service, so a synced edit lands in the
+  container immediately:
+  ```yaml
+  services:
+    web:
+      volumes:
+        - ./:/app             # the synced /workspace, live in the container
+        - /app/node_modules   # keep the container's own deps (see the note below)
+  ```
+- **Run the service in its own dev/watch mode**, so its file watcher does the
+  reload: `vite`, `next dev`, `nodemon`, `air`, `watchexec`, and the like, set via
+  the compose `command:`.
+
+mutagen delivers the edit to `/workspace`, the bind mount surfaces it in the
+container, and the in-container watcher reloads. `examples/hello` is the minimal
+version of this (`volumes: - ./:/site`).
+
+The one gotcha: the sync excludes regenerable dirs (`node_modules`, `.git`, and
+anything in `sync.ignore`), so the env installs its own. A bare `./:/app` bind
+mount would then shadow the container's `node_modules` with the empty host one.
+Shield each install-output dir with an anonymous volume, as `/app/node_modules`
+above (add `/app/target`, `/app/.venv`, etc. for other stacks), and mirror those
+paths in the contract's `sync.ignore`.
+
+**Do not use Compose's `develop:`/`watch` for this.** Those rules run only under
+`docker compose watch` (or `up --watch`), and Sonoma always runs `up -d`, so a
+`develop:` block is silently ignored here. Bind mounts are the mechanism.
+
+## 7. Gate on confidence, then offer `up`
 
 Before offering to spin up, sanity-check your own work:
 

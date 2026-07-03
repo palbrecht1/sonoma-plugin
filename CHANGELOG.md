@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.3.1...plugin-v0.4.0) (2026-07-03)
+
+
+### Features
+
+* env debugging guide + surface lastError in status ([#59](https://github.com/palbrecht1/sonoma/issues/59)) ([868d78a](https://github.com/palbrecht1/sonoma/commit/868d78a800a8d19fbecc0a87a1971b8113f4c3b6))
+
 ## [0.3.1](https://github.com/palbrecht1/sonoma/compare/plugin-v0.3.0...plugin-v0.3.1) (2026-07-03)
 
 
