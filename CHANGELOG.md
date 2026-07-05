@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.4.0...plugin-v0.5.0) (2026-07-05)
+
+
+### Features
+
+* link todo example + warn on first-up cold start ([#63](https://github.com/palbrecht1/sonoma/issues/63)) ([215f4a4](https://github.com/palbrecht1/sonoma/commit/215f4a4965ee494cb1e7e3d4521c1f96774d4cdc))
+
 ## [0.4.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.3.1...plugin-v0.4.0) (2026-07-03)
 
 

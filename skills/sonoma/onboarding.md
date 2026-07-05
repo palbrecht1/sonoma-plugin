@@ -209,6 +209,12 @@ When you detect a frontend + backend split, propose exactly this: expose both
 services, point the frontend's API URL at the `api--<slug>` host, and set the
 API's CORS origin to the `web--<slug>` host.
 
+A complete, runnable version of this exact shape lives at
+https://github.com/NicholasZolton/sonoma-todo-example (Next.js `web` + Express
+`api` + Postgres `db`, with the `sonoma.yaml`, compose `environment:` wiring, and
+seed all filled in). Point the user there, or read it yourself, when you need a
+concrete reference for a frontend + backend project.
+
 ### Set up the gitignored side-pieces
 
 Make sure the repo's `.gitignore` covers the two paths the contract assumes:

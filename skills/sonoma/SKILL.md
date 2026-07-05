@@ -39,6 +39,15 @@ The Sonoma CLI is the `sonoma` command, installed globally from the npm package 
 
    This prints the env id and, once ready, the preview URL. If it reports that
    you are not logged in, tell the user to run `sonoma login` (it opens the browser to sign in) and stop.
+
+   The FIRST `up` on a project+branch is a cold start: the env boots with an
+   empty Docker image store, so its `compose up` pulls base images and builds
+   from scratch (a multi-service stack can take a minute or more). This is a
+   one-time cost per env, not a hang; the CLI prints a heads-up when it spawns
+   fresh, and a per-phase breakdown when it reaches `READY`. Later `up`s on the
+   same project+branch reuse the env and take seconds. Tell the user this if a
+   first boot runs long, rather than assuming something is wrong.
+
    If `up` hangs on a phase (for example it sits at `AWAITING_SYNC`) or the env
    reports `FAILED`, do not just retry blindly: read
    [debugging.md](./debugging.md) and work through it. You can run commands and
