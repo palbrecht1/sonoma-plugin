@@ -52,6 +52,13 @@ The Sonoma CLI is the `sonoma` command, installed globally from the npm package 
    reports `FAILED`, do not just retry blindly: read
    [debugging.md](./debugging.md) and work through it. You can run commands and
    stream logs inside the env to find the cause.
+
+   If `sonoma up` reports that it found a contract or compose file in a
+   subdirectory (a "found <path> ... non-interactive" message), this is not a
+   failure. Do not retry blindly. Relay the discovered path to the user and ask
+   whether to use it. On confirmation, re-run `sonoma up --config <path>`. Note
+   that only the subdirectory's compose path is adjusted; the whole working tree
+   is still synced.
 4. Do the coding work for the user's request in this repository as usual. The
    running sync delivers every edit into the environment, so the preview
    reflects your changes without any extra step.

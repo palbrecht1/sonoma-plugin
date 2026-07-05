@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.5.0...plugin-v0.6.0) (2026-07-05)
+
+
+### Features
+
+* **client:** subdir contract discovery + `sonoma up --config` ([#82](https://github.com/palbrecht1/sonoma/issues/82)) ([cc92733](https://github.com/palbrecht1/sonoma/commit/cc92733b58333be6c53f9758706433365796df2c))
+
 ## [0.5.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.4.0...plugin-v0.5.0) (2026-07-05)
 
 
