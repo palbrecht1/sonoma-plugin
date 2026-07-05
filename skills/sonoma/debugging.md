@@ -109,8 +109,8 @@ the project's own stack, and the logs tell you which.
 
 Remember the shareable-URL rules from onboarding: if the preview loads but its
 API calls fail, the frontend is probably calling `localhost` instead of the
-`api--<slug>` host, or the API's CORS origin does not allow the `web--<slug>`
-host. That is a contract/compose fix, not an env fault.
+`<slug>-api-<hash>` host, or the API's CORS origin does not allow the
+`<slug>-web-<hash>` host. That is a contract/compose fix, not an env fault.
 
 ## Failed at PROVISIONING
 

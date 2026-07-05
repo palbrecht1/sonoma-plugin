@@ -172,21 +172,21 @@ How addressing works:
   - `SONOMA_SLUG`: the env's short id.
   - `SONOMA_BASE_DOMAIN`: `sonoma.sh`.
 - Every service you list in `expose` is reachable at a single-level subdomain
-  `https://<service>--${SONOMA_SLUG}.${SONOMA_BASE_DOMAIN}` (one wildcard cert
-  covers all of them). The `primary` entry is the shareable link.
+  `https://${SONOMA_SLUG}-<service>-${SONOMA_HASH}.${SONOMA_BASE_DOMAIN}` (one
+  wildcard cert covers all of them). The `primary` entry is the shareable link.
 
 What this means for `expose`: add an entry for every service that is hit from
 outside the env, not just the frontend. A browser-side frontend that calls a
 separate backend means **both** `web` and `api` need to be exposed, because the
-browser reaches the API over its public `api--<slug>` URL, not `localhost`.
+browser reaches the API over its public `<slug>-api-<hash>` URL, not `localhost`.
 
 The interpolation rule that trips people up:
 
 - `.env.sonoma` is loaded via compose `env_file:`, and those values are
   **literal**, so `${SONOMA_SLUG}` does NOT expand there. Put only static or
   secret values in `.env.sonoma`.
-- Anything that must reference the slug (the API URL the frontend points at, and
-  the CORS allow-origin the API honors) goes in the compose `environment:`
+- Anything that must reference the slug/hash (the API URL the frontend points at,
+  and the CORS allow-origin the API honors) goes in the compose `environment:`
   block, which compose **does** interpolate, because Sonoma set those vars on the
   VM.
 
@@ -197,17 +197,17 @@ services:
   web:
     environment:
       # the frontend (in the browser) calls the API at its public URL, not localhost
-      - NEXT_PUBLIC_API_URL=https://api--${SONOMA_SLUG}.${SONOMA_BASE_DOMAIN}
+      - NEXT_PUBLIC_API_URL=https://${SONOMA_SLUG}-api-${SONOMA_HASH}.${SONOMA_BASE_DOMAIN}
   api:
     environment:
       # the API must allow the frontend's public origin or the browser blocks the calls
-      - CORS_ORIGIN=https://web--${SONOMA_SLUG}.${SONOMA_BASE_DOMAIN}
+      - CORS_ORIGIN=https://${SONOMA_SLUG}-web-${SONOMA_HASH}.${SONOMA_BASE_DOMAIN}
     env_file: .env.sonoma   # static/secret values only; no ${SONOMA_*} here
 ```
 
 When you detect a frontend + backend split, propose exactly this: expose both
-services, point the frontend's API URL at the `api--<slug>` host, and set the
-API's CORS origin to the `web--<slug>` host.
+services, point the frontend's API URL at the `<slug>-api-<hash>` host, and set
+the API's CORS origin to the `<slug>-web-<hash>` host.
 
 A complete, runnable version of this exact shape lives at
 https://github.com/NicholasZolton/sonoma-todo-example (Next.js `web` + Express
@@ -267,8 +267,8 @@ Before offering to spin up, sanity-check your own work:
 - The `primary` port maps to a service that the compose actually publishes.
 - The `ready` probe targets that primary service and is plausible.
 - If the frontend calls a separate API: that API is also in `expose`, the
-  frontend's API URL points at the `api--${SONOMA_SLUG}.${SONOMA_BASE_DOMAIN}`
-  host (not localhost), and the API's CORS origin allows the `web--${SONOMA_SLUG}`
+  frontend's API URL points at the `${SONOMA_SLUG}-api-${SONOMA_HASH}.${SONOMA_BASE_DOMAIN}`
+  host (not localhost), and the API's CORS origin allows the `${SONOMA_SLUG}-web-${SONOMA_HASH}`
   host. These live in the compose `environment:` block, not `.env.sonoma`.
 
 When that holds, ask the user: "Looks ready, want me to spin it up now?" On yes,

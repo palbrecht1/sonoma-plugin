@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.6.0...plugin-v0.7.0) (2026-07-05)
+
+
+### Features
+
+* **control-plane:** human-readable preview subdomains ([768212c](https://github.com/palbrecht1/sonoma/commit/768212c1f1eed82d484c769648bc58120d18ec03))
+* **control-plane:** human-readable preview subdomains ([8509e84](https://github.com/palbrecht1/sonoma/commit/8509e8493a4525902f85843b105980d64175952a))
+
 ## [0.6.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.5.0...plugin-v0.6.0) (2026-07-05)
 
 
