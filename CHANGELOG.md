@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.7.0...plugin-v0.8.0) (2026-07-09)
+
+
+### Features
+
+* forward shell env vars into an env with `sonoma up --env` ([dffea7b](https://github.com/palbrecht1/sonoma/commit/dffea7b8924a20fb9f2779159454fa6ff7abd401))
+* forward shell env vars into an env with `sonoma up --env` ([a15d922](https://github.com/palbrecht1/sonoma/commit/a15d9224ee273e5d330556dd6811fd1c8cc6a10d))
+
 ## [0.7.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.6.0...plugin-v0.7.0) (2026-07-05)
 
 

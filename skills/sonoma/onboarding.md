@@ -23,7 +23,7 @@ If it is missing, ensure bun is present, then install the CLI globally:
 
 ```bash
 curl -fsSL https://bun.sh/install | bash   # only if bun is missing
-bun add -g @sonoma-sh/cli
+bun add -g @sonoma.sh/cli
 ```
 
 ## 2. Run the doctor
@@ -156,6 +156,35 @@ Rules that matter:
 - **Secrets never go in `sonoma.yaml`.** Config and secret values live in a
   gitignored `.env.sonoma`, synced into the env and loaded by the project's own
   compose via `env_file:`. The contract does not reference secrets at all.
+
+### Forwarding shell env vars inline (`--env`)
+
+If you would rather not keep a `.env.sonoma` on disk, you can forward named vars
+straight from the shell you run `sonoma up` in:
+
+```bash
+export DATABASE_URL=postgres://...
+export STRIPE_KEY=sk_live_...
+sonoma up --env DATABASE_URL --env STRIPE_KEY   # repeat --env per var, by NAME
+```
+
+Each `--env NAME` reads that var's *value* from your current shell (so secret
+values never appear in the command line or your history) and sends it with the
+spawn. **No project changes are needed** -- you do not add anything to
+`sonoma.yaml` or your compose file. Under the hood Sonoma injects the vars into
+your services for you (for a compose project it merges a generated overlay into
+`docker compose up`; for a `start:` command it sets them on the process env).
+
+Notes:
+
+- The vars are injected into every service, so any service can read them (like a
+  root-level `.env` would). Values needing `${SONOMA_*}` still belong in the
+  compose `environment:` block.
+- Forwarding happens at *spawn*. Changing a `--env` value on a later `sonoma up`
+  that reuses a live env has no effect; run `sonoma down` first to re-forward.
+- `sonoma up` fails fast if a named var is unset in your shell, is not a valid env
+  var name, or holds a multi-line value (keep multi-line secrets in `.env.sonoma`).
+- `.env.sonoma` and `--env` compose freely; use either or both.
 
 ### Shareable URLs: the slug, cross-service APIs, and CORS
 

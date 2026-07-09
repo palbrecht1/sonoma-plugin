@@ -20,7 +20,7 @@ just spawns an env.
 
 ## Steps
 
-The Sonoma CLI is the `sonoma` command, installed globally from the npm package `@sonoma-sh/cli` (it runs on the Bun runtime). If `sonoma` is not on PATH, ensure bun is present (`curl -fsSL https://bun.sh/install | bash`) and install the CLI with `bun add -g @sonoma-sh/cli`, then continue.
+The Sonoma CLI is the `sonoma` command, installed globally from the npm package `@sonoma.sh/cli` (it runs on the Bun runtime). If `sonoma` is not on PATH, ensure bun is present (`curl -fsSL https://bun.sh/install | bash`) and install the CLI with `bun add -g @sonoma.sh/cli`, then continue.
 
 1. Confirm the project and branch. The project is this git repository; the
    branch is the current git branch. The user may override either.

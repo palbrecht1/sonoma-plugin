@@ -17,7 +17,7 @@ for a coding task and get a shareable preview URL, all from Claude Code.
 The skill drives the `sonoma` CLI, installed globally from npm:
 
 ```
-bun add -g @sonoma-sh/cli
+bun add -g @sonoma.sh/cli
 ```
 
 On first use in a repo, the skill walks you through one-time setup (login,
