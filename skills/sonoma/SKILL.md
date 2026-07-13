@@ -64,7 +64,21 @@ The Sonoma CLI is the `sonoma` command, installed globally from the npm package 
    reflects your changes without any extra step.
 5. QA against the preview URL (load it, exercise the changed flow). Report the
    preview URL and a short summary of what you changed and verified.
-6. The environment is torn down automatically when its branch's PR merges. If
+6. If the environment needs to outlive the default max age, pin it. With no id,
+   the command targets the current project and branch. A pin lasts seven days by
+   default; use `--for` to choose another duration:
+
+   ```bash
+   sonoma pin              # current project + branch, seven days
+   sonoma pin --for 12h
+   sonoma pin --for 7d
+   sonoma pin <id> --for 2w
+   sonoma unpin [id]
+   ```
+
+   Pinning changes max-age cleanup only. Merge teardown and `sonoma down` still
+   apply. Use `sonoma unpin` to restore normal max-age cleanup sooner.
+7. The environment is torn down automatically when its branch's PR merges. If
    the user wants to end it sooner, run `sonoma down`.
 
 Keep this skill thin. The orchestration lives in the `sonoma` CLI and the

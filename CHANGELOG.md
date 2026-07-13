@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.9.0...plugin-v0.10.0) (2026-07-13)
+
+
+### Features
+
+* add environment pinning ([#133](https://github.com/palbrecht1/sonoma/issues/133)) ([3ababfa](https://github.com/palbrecht1/sonoma/commit/3ababfa7dbed00222ac8f30364f21e9246f34bf6))
+
 ## [0.9.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.8.0...plugin-v0.9.0) (2026-07-12)
 
 
