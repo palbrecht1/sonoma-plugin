@@ -113,8 +113,10 @@ Look at what the repo already declares:
 From that, draft a `sonoma.yaml`:
 
 - `environment.compose`: path to the compose file (relative to repo root).
-- `expose`: one entry per service the user reaches. Mark the user-facing one
-  `primary: true`. That primary is both the share link and the readiness target.
+- `expose`: one entry per service that needs a **public URL** (the browser reaches it). Mark the
+  user-facing one `primary: true` (the share link + readiness target). Do NOT expose internal
+  services (workers, an API only the server calls, datastores): they already reach each other by
+  compose name inside the env, so exposing them only puts them on the public internet needlessly.
 - `seed`: how to seed data, if the project needs it.
 - `ready`: a single probe against the primary service, either an HTTP check or
   an arbitrary command, that the control plane retries until it passes.
@@ -134,12 +136,15 @@ environment:
   compose: docker-compose.yml             # the stack, run inside the env
   # escape hatch when there is no compose: start: ./scripts/start.sh
 seed: pnpm db:reset                       # optional: how to seed the env
+preview:
+  access: public                          # optional env-wide default; per-service access overrides it
 expose:
   - service: web                          # must match a service in the compose
     port: 3000
     primary: true                         # the share link + readiness target
   - service: api
     port: 4000
+    access: tenant-only                   # optional per-service; here api requires owner login, web stays public
 ready: "curl -fsS http://localhost:3000/healthz"   # HTTP or arbitrary command
 sync:                                     # optional: extra paths to keep out of the sync
   ignore:
@@ -156,6 +161,12 @@ Rules that matter:
 - **Secrets never go in `sonoma.yaml`.** Config and secret values live in a
   gitignored `.env.sonoma`, synced into the env and loaded by the project's own
   compose via `env_file:`. The contract does not reference secrets at all.
+- **Access defaults to `public`.** Set `access: tenant-only` (per service, or as an env-wide
+  `preview.access` default) only for a service whose preview runs against real data the owner does
+  not want anyone with the URL to see; it then requires the owner to log in before that service
+  loads. A service's own `access` overrides the env default. Keep in mind `tenant-only` uses a browser
+  session, so it blocks non-browser inbound (webhooks, external callbacks) to that service; use
+  `public` for those.
 
 ### Forwarding shell env vars inline (`--env`)
 

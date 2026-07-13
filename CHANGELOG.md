@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.8.0...plugin-v0.9.0) (2026-07-12)
+
+
+### Features
+
+* optional per-project preview auth (tenant-only previews) ([#64](https://github.com/palbrecht1/sonoma/issues/64)) ([9e899f3](https://github.com/palbrecht1/sonoma/commit/9e899f3f3aaadef12aa07668a6de733f073bc8a6))
+
 ## [0.8.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.7.0...plugin-v0.8.0) (2026-07-09)
 
 
