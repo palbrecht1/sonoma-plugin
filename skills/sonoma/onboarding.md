@@ -265,6 +265,30 @@ Make sure the repo's `.gitignore` covers the two paths the contract assumes:
 
 Add them if they are missing.
 
+### Import a personal repository config
+
+Store a reusable contract for one repository under your own Sonoma account:
+
+```bash
+sonoma config import ./sonoma.yaml --repo upstream/project
+sonoma config list
+sonoma config show --repo upstream/project
+sonoma up --repo upstream/project
+sonoma config remove --repo upstream/project
+```
+
+Importing the same repository again replaces the previous personal config.
+Use `--repo upstream/project` from a fork when the upstream config should apply.
+For a fresh env, precedence is an explicit `--config`, then an imported config,
+then the local synthesized or inferred fallback. Do not put secrets in imported
+configs or `sonoma.yaml`; keep them in gitignored `.env.sonoma` or forward them
+with `--env`.
+
+Configuration is selected only when Sonoma spawns an env. A live env is reused,
+so run `sonoma down` before `up` when changing the repository, config, or
+forwarded variables. `sonoma up --dry-run` is local only: it resolves the local
+contract and never fetches or uses an imported config.
+
 ## 6. Make your edits hot-reload
 
 Sonoma syncs the working tree into the env's `/workspace` and runs `docker

@@ -37,6 +37,11 @@ or lands in `FAILED` with a reason. `sonoma status <id>` prints that reason on a
 `↳` line, so start there. The env's sshd answers from `AWAITING_SYNC` onward, so
 `exec` and `ssh` work while it is still coming up, not just once it is `READY`.
 
+When available, `status` also prints `configuration source: request`,
+`imported`, or `synthesized`. This identifies the contract source only; status
+does not retain a repository key. Fresh `up` output includes the repository key
+used for that spawn.
+
 ## Running commands and streaming logs
 
 The stack runs inside the env as `docker compose -f <compose-file> up -d` from

@@ -37,6 +37,11 @@ The Sonoma CLI is the `sonoma` command, installed globally from the npm package 
    sonoma up
    ```
 
+   Repository configs are personal to the signed-in user. Use them when a
+   repository has a shared starting contract, including when working from a
+   fork with `sonoma up --repo upstream/project`. See
+   [onboarding.md](./onboarding.md) for the import workflow and precedence.
+
    This prints the env id and, once ready, the preview URL. If it reports that
    you are not logged in, tell the user to run `sonoma login` (it opens the browser to sign in) and stop.
 

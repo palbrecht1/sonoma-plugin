@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.10.0...plugin-v0.11.0) (2026-07-18)
+
+
+### Features
+
+* add personal repository config imports ([5945d27](https://github.com/palbrecht1/sonoma/commit/5945d277c98461c7a066db7a36c49334145c4e20))
+
 ## [0.10.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.9.0...plugin-v0.10.0) (2026-07-13)
 
 
