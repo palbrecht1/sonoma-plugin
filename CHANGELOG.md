@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.11.0...plugin-v0.12.0) (2026-07-21)
+
+
+### Features
+
+* add reviews to pinned environments ([#140](https://github.com/palbrecht1/sonoma/issues/140)) ([bf358fa](https://github.com/palbrecht1/sonoma/commit/bf358fa27b23ff7f516d2489206589b11e1b54dd))
+
 ## [0.11.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.10.0...plugin-v0.11.0) (2026-07-18)
 
 
