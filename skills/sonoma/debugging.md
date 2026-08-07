@@ -6,17 +6,11 @@ stream its logs, so you almost never have to guess.
 
 ## The toolbox
 
-Every command takes an optional `[id]`. Omit it and Sonoma uses the env recorded
-for this repo + branch, so you rarely need to pass one.
-
-| Command | What it does |
-| --- | --- |
-| `sonoma status [id]` | Show one env (with its failure reason), or list all envs. |
-| `sonoma exec [id] -- <cmd>` | Run one command inside the env and print its output. |
-| `sonoma ssh [id]` | Open an interactive shell inside the env. |
-| `sonoma sync flush [id]` | Force the mutagen session to deliver every pending file now. |
-| `sonoma sync stop [id]` | Terminate the mutagen session (to reset a wedged sync). |
-| `sonoma down [id]` | Tear the env down. |
+Read the complete [CLI command reference](./cli-reference.md), especially
+*Environment access and debugging*. It contains the exact current help, targeting
+behavior, examples, and guidance for `status`, `exec`, `ssh`, `sync`, and
+`down`. Prefer `sonoma exec [id] -- <cmd>` for reproducible agent work and use
+`sonoma ssh [id]` when an interactive shell is genuinely useful.
 
 `exec` and `ssh` land you in `/workspace`, which is the env's WORKDIR and the
 root the sync writes into. The env is a small Alpine image with `docker`,

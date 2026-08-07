@@ -1,6 +1,6 @@
 ---
 name: sonoma
-description: Use when the user wants an isolated, seeded full-stack preview environment for a coding task. Spawns a remote env, syncs the working tree, and returns a shareable preview URL.
+description: Use when the user wants to create, operate, inspect, or troubleshoot a Sonoma task environment or persistent office. Covers the complete Sonoma CLI command surface, remote execution, sync, previews, repository configs, and pinned reviews.
 ---
 
 # Sonoma
@@ -8,6 +8,16 @@ description: Use when the user wants an isolated, seeded full-stack preview envi
 Spin up an isolated full-stack environment for the current task and return a
 preview URL. The environment runs on the Sonoma control plane; your edits sync
 into it live, so you can QA against the preview while you work.
+
+## CLI command context
+
+Before invoking Sonoma, read [cli-reference.md](./cli-reference.md) completely.
+It packages every public CLI command with exact help generated from the CLI and
+agent-oriented guidance about when to use it. Use that reference for command
+discovery, syntax, options, examples, environment access with `exec` and `ssh`,
+debugging with `status` and `sync`, repository configs, reviews, and persistent
+offices. If the installed CLI differs, trust its live `sonoma --help` or
+`sonoma <command> --help` output.
 
 How it fits together: the Sonoma CLI is the deterministic local driver, the
 control plane hosts the env and validates the project contract, and each repo

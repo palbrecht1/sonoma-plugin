@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.12.0...plugin-v0.13.0) (2026-08-07)
+
+
+### Features
+
+* **plugin:** add generated CLI command reference ([7be4f1c](https://github.com/palbrecht1/sonoma/commit/7be4f1cde7d66f22924bbfd43f5787605e0b7829))
+* **plugin:** add generated CLI command reference ([740b4eb](https://github.com/palbrecht1/sonoma/commit/740b4eb8c3b0e409389acea84888abb8c2d054f9))
+
 ## [0.12.0](https://github.com/palbrecht1/sonoma/compare/plugin-v0.11.0...plugin-v0.12.0) (2026-07-21)
 
 
